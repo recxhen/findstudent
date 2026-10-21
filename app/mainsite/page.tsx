@@ -1,16 +1,14 @@
 import type { Metadata } from 'next';
 
-// 網頁標題交由 Next.js Metadata API 處理
 export const metadata: Metadata = {
-  title: '★☆ 真善美之家安置機構 ☆★',
+  title: '★☆ 歡迎光臨真善美之家 ☆★',
 };
 
 export default function MainSitePage() {
   return (
     <>
-      {/* 嵌入 2005 年風格的自訂 CSS */}
       <style>{`
-        /* 蓋掉預設全域排版，模擬 2005 復古桌機視角 */
+        /* 全域復古深色掃描線背景與新細明體 */
         body {
           margin: 0;
           padding: 20px 0;
@@ -37,14 +35,39 @@ export default function MainSitePage() {
           box-shadow: 0 0 15px #000000;
         }
 
-        .top-marquee {
+        /* 頂部跑馬燈容器（隱藏溢出內容） */
+        .marquee-wrapper {
           background-color: #000000;
-          color: #00ffcc;
-          padding: 3px 6px;
-          font-size: 11px;
           border-bottom: 1px solid #1e3f66;
+          overflow: hidden;
+          white-space: nowrap;
+          padding: 4px 0;
         }
 
+        /* 跑馬燈內容文字與動畫 */
+        .marquee-content {
+          display: inline-block;
+          padding-left: 100%;
+          color: #00ffcc;
+          font-size: 11px;
+          animation: marquee 16s linear infinite;
+        }
+
+        /* 滑鼠懸停時暫停跑馬燈（比照早期 marquee 特性） */
+        .marquee-wrapper:hover .marquee-content {
+          animation-play-state: paused;
+        }
+
+        @keyframes marquee {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-100%, 0, 0);
+          }
+        }
+
+        /* 橫幅主體 */
         .classic-banner {
           height: 150px;
           background: linear-gradient(180deg, #1f4f8b 0%, #0d2342 60%, #081426 100%);
@@ -81,6 +104,7 @@ export default function MainSitePage() {
           color: #7fa4cf;
         }
 
+        /* 導覽列 */
         .nav-bar {
           background: linear-gradient(180deg, #2b3b52 0%, #17212e 100%);
           border-bottom: 1px solid #0a0f16;
@@ -89,6 +113,7 @@ export default function MainSitePage() {
           white-space: nowrap;
         }
 
+        /* 水晶果凍按鈕 */
         .aqua-btn {
           display: inline-block;
           text-decoration: none;
@@ -120,35 +145,30 @@ export default function MainSitePage() {
         }
       `}</style>
 
-      {/* 主版面容器（固定 780px） */}
       <div id="main-container">
-        {/* 頂部跑馬燈公告（marquee 在 React 中需略過型別檢查） */}
-        <div className="top-marquee">
-          {/* @ts-expect-error marquee 為非標準舊式標籤 */}
-          <marquee scrollamount="3">
+        {/* 使用純 CSS 動畫跑馬燈，替代廢棄的 marquee 標籤 */}
+        <div className="marquee-wrapper">
+          <div className="marquee-content">
             [公告] 歡迎光臨本站！建議使用 Internet Explorer 6.0 與 1024x768 解析度瀏覽以獲得最佳效果！最新改版完成～
-          </marquee>
+          </div>
         </div>
 
-        {/* Banner 橫幅 */}
+        {/* Banner 橫幅主體 */}
         <div className="classic-banner">
-          <h1 className="banner-title">◆ 真善美之家 ◆</h1>
+          <h1 className="banner-title">◆ 幻夜の秘密花園 ◆</h1>
           <div className="banner-subtitle">～ 永遠的友誼與回憶之殿堂 ～ Since 2005.07.07</div>
           <div className="banner-info">Best View: IE 6.0+ | 1024*768</div>
         </div>
 
-        {/* ============================================== */}
-        {/* 【分頁按鈕挖空區】：在此增減或替換你的分頁連結 */}
-        {/* ============================================== */}
+        {/* 按鈕分頁區塊 */}
         <div className="nav-bar">
-          <a href="/mainsite" className="aqua-btn active">【 園區首頁 】</a>
+          <a href="/mainsite" className="aqua-btn active">【 站長首頁 】</a>
           <a href="/mainsite/diary" className="aqua-btn">心情日記</a>
           <a href="/mainsite/gallery" className="aqua-btn">貼圖相簿</a>
           <a href="/mainsite/games" className="aqua-btn">Flash遊戲</a>
           <a href="/mainsite/guestbook" className="aqua-btn">訪客留言板</a>
           <a href="/mainsite/links" className="aqua-btn">友情連結</a>
         </div>
-        {/* ============================================== */}
       </div>
     </>
   );
