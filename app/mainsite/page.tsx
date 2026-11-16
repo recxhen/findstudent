@@ -275,7 +275,8 @@ export default function MainSitePage() {
 
         {/* 導覽列按鈕 */}
         <div className="nav-bar">
-          <a href="/mainsite" className="aqua-btn active">【 站長首頁 】</a>
+          <a href="/Home" className="aqua-btn active">【 站長首頁 】</a>
+          <a href="/Announcement" className="aqua-btn">最新消息</a>
           <a href="/mainsite/diary" className="aqua-btn">心情日記</a>
           <a href="/mainsite/gallery" className="aqua-btn">貼圖相簿</a>
           <a href="/mainsite/games" className="aqua-btn">Flash遊戲</a>
